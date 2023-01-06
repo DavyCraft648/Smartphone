@@ -1,0 +1,11 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/DavyCraft648/Smartphone
+build-by-default: true
+branches:
+- main
+projects:
+  Smartphone:
+    path: ""
+    libs:
+      - src: "https://poggit.pmmp.io/ci/supercrafter333/FormAPI/libFormAPI"
+        version: ^2.1
+...
