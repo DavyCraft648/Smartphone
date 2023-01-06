@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/../../../PMMPLibs/pm5" />
+      <path value="$PROJECT_DIR$/../../../Customies2/plugins/Customies" />
+      <path value="$PROJECT_DIR$/../../virions/FormAPI" />
+      <path value="$PROJECT_DIR$/../../../ResourcePacks/SmartphonesV2.2" />
+      <path value="$PROJECT_DIR$/../../../KRZ_Survival/plugins/BedrockEconomy" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
+</project>

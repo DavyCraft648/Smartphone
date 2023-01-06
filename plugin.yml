@@ -1,0 +1,16 @@
+name: Smartphone
+main: DavyCraft648\Smartphone\Main
+version: 1.0.0
+api: [ "4.0.0", "5.0.0" ]
+depend:
+  - Customies
+  - BedrockEconomy
+
+authors:
+  - DavyCraft648
+  - Peepss
+description: |
+  PocketMine plugin version of Smartphones add-on.
+  Original add-on created by Peepss, https://mcpedl.com/smartphone-add-on-only-for-1-18-2/
+  Change the time, change the weather, get effects, play music and more. All possible just in the palm of your hand!
+website: https://github.com/DavyCraft648/Smartphone
