@@ -7,7 +7,6 @@ use customiesdevs\customies\item\ItemComponentsTrait;
 use DavyCraft648\Smartphone\SmartphoneForm;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\ItemUseResult;
-use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\network\mcpe\protocol\SetTitlePacket;
 use pocketmine\player\Player;

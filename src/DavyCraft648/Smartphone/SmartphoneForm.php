@@ -8,6 +8,7 @@ use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
+use pocketmine\item\ItemFactory;
 use pocketmine\item\VanillaItems;
 use pocketmine\network\mcpe\protocol\LevelEventPacket;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
@@ -18,6 +19,7 @@ use pocketmine\network\mcpe\protocol\TextPacket;
 use pocketmine\network\mcpe\protocol\types\LevelEvent;
 use pocketmine\network\mcpe\protocol\types\LevelSoundEvent;
 use pocketmine\player\Player;
+use pocketmine\VersionInfo;
 use pocketmine\world\World;
 use function array_map;
 use function array_values;
@@ -270,6 +272,13 @@ class SmartphoneForm{
 					self::sendStoreItemsAppForm($player, $battery);
 					return;
 				}
+				if(VersionInfo::BASE_VERSION[0] === "4" && $data === 9){ // pm4 doesn't have phantom membrane
+					$pk = new TextPacket();
+					$pk->type = TextPacket::TYPE_JSON;
+					$pk->message = '{"rawtext":[{"translate":"text.coming_soon"}]}';
+					$player->getNetworkSession()->sendDataPacket($pk);
+					return;
+				}
 				BedrockEconomyAPI::beta()->deduct($player->getName(), match ($data) {
 					1, 2 => 1,
 					3, 10, 14, 15, 16 => 5,
@@ -510,6 +519,13 @@ class SmartphoneForm{
 	}
 
 	public static function sendStoreItemsArmorsNetheriteAppForm(Player $player, string $battery) : void{
+		if(!Main::$enableNetheriteItems){
+			$pk = new TextPacket();
+			$pk->type = TextPacket::TYPE_JSON;
+			$pk->message = '{"rawtext":[{"translate":"text.coming_soon"}]}';
+			$player->getNetworkSession()->sendDataPacket($pk);
+			return;
+		}
 		BedrockEconomyAPI::beta()->get($player->getName())->onCompletion(function(int $balance) use ($player, $battery) : void{
 			$form = new SimpleForm(function(Player $player, ?int $data) use ($battery) : void{
 				unset(SmartphoneForm::$waitingFormResponse[$player->getName()]);
@@ -526,10 +542,10 @@ class SmartphoneForm{
 					4 => 2000
 				})->onCompletion(function(?bool $_) use ($battery, $data, $player) : void{
 					$player->getInventory()->addItem(match ($data) {
-						1 => VanillaItems::NETHERITE_HELMET(),
-						2 => VanillaItems::NETHERITE_CHESTPLATE(),
-						3 => VanillaItems::NETHERITE_LEGGINGS(),
-						4 => VanillaItems::NETHERITE_BOOTS()
+						1 => VersionInfo::BASE_VERSION[0] === "5" ? VanillaItems::NETHERITE_HELMET() : ItemFactory::getInstance()->get(748),
+						2 => VersionInfo::BASE_VERSION[0] === "5" ? VanillaItems::NETHERITE_CHESTPLATE() : ItemFactory::getInstance()->get(749),
+						3 => VersionInfo::BASE_VERSION[0] === "5" ? VanillaItems::NETHERITE_LEGGINGS() : ItemFactory::getInstance()->get(750),
+						4 => VersionInfo::BASE_VERSION[0] === "5" ? VanillaItems::NETHERITE_BOOTS() : ItemFactory::getInstance()->get(751)
 					});
 					$pk = new TextPacket();
 					$pk->type = TextPacket::TYPE_JSON;
@@ -726,6 +742,13 @@ class SmartphoneForm{
 	}
 
 	public static function sendStoreItemsWeaponsNetheriteAppForm(Player $player, string $battery) : void{
+		if(!Main::$enableNetheriteItems){
+			$pk = new TextPacket();
+			$pk->type = TextPacket::TYPE_JSON;
+			$pk->message = '{"rawtext":[{"translate":"text.coming_soon"}]}';
+			$player->getNetworkSession()->sendDataPacket($pk);
+			return;
+		}
 		BedrockEconomyAPI::beta()->get($player->getName())->onCompletion(function(int $balance) use ($player, $battery) : void{
 			$form = new SimpleForm(function(Player $player, ?int $data) use ($battery) : void{
 				unset(SmartphoneForm::$waitingFormResponse[$player->getName()]);
@@ -740,10 +763,10 @@ class SmartphoneForm{
 					2, 3 => 1500
 				})->onCompletion(function(?bool $_) use ($battery, $data, $player) : void{
 					$player->getInventory()->addItem(match ($data) {
-						1 => VanillaItems::NETHERITE_SWORD(),
-						2 => VanillaItems::NETHERITE_PICKAXE(),
-						3 => VanillaItems::NETHERITE_AXE(),
-						4 => VanillaItems::NETHERITE_SHOVEL()
+						1 => VersionInfo::BASE_VERSION[0] === "5" ? VanillaItems::NETHERITE_SWORD() : ItemFactory::getInstance()->get(743),
+						2 => VersionInfo::BASE_VERSION[0] === "5" ? VanillaItems::NETHERITE_PICKAXE() : ItemFactory::getInstance()->get(745),
+						3 => VersionInfo::BASE_VERSION[0] === "5" ? VanillaItems::NETHERITE_AXE() : ItemFactory::getInstance()->get(746),
+						4 => VersionInfo::BASE_VERSION[0] === "5" ? VanillaItems::NETHERITE_SHOVEL() : ItemFactory::getInstance()->get(744)
 					});
 					$pk = new TextPacket();
 					$pk->type = TextPacket::TYPE_JSON;

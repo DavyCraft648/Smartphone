@@ -1,7 +1,10 @@
 name: Smartphone
 main: DavyCraft648\Smartphone\Main
-version: 1.0.0
-api: [ "4.0.0", "5.0.0" ]
+version: 1.0.1
+api: [ "4.13.0", "5.0.0" ]
+softdepend:
+  - Netherite
+  - VanillaX
 depend:
   - Customies
   - BedrockEconomy
